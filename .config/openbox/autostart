@@ -1,0 +1,8 @@
+tint2
+xautolock -time 10 -locker slock
+numlockx &
+nm-applet
+gnome-terminal
+hexchat
+chromium-browser
+kaze
