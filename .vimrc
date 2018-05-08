@@ -10,6 +10,8 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
 "Plugin 'klen/python-mode'
 " Plugin 'powerline/powerline'
 Plugin 'tpope/vim-fugitive'
@@ -33,11 +35,11 @@ filetype plugin on
 " Put your non-Plugin stuff after this line
 
 let g:airline_powerline_fonts = 0
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_theme='distinguished'
+let g:airline_left_sep        = ''
+let g:airline_left_alt_sep    = ''
+let g:airline_right_sep       = ''
+let g:airline_right_alt_sep   = ''
+let g:airline_theme           = 'distinguished'
 
 set clipboard=unnamedplus
 map <C-n> :NERDTreeToggle<CR>
@@ -57,9 +59,11 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+"let g:syntastic_auto_loc_list           = 1
+let g:syntastic_check_on_open            = 1
+let g:syntastic_check_on_wq              = 0
+let g:syntastic_python_checkers          = ['flake8']
+let g:syntastic_javascript_checkers      = ['jshint']
 
 " aus
 " https://hutten.knut.univention.de/mediawiki/index.php/Dev-Azubi_Einrichtung#.vimrc
@@ -84,6 +88,9 @@ set autoindent
 set si "Smart indent
 set wrap "Wrap lines
 
+set colorcolumn=80
+hi ColorColumn ctermbg=237
+
 " Be smart when using tabs ;)
 set smarttab
 
@@ -91,14 +98,15 @@ set smarttab
 set smartcase
 
 set number
-set cursorline
-hi cursorline cterm=none
-hi cursorlinenr ctermfg=white
+" disabled weil slowdown
+"set cursorline
+"hi cursorline cterm=none
+"hi cursorlinenr ctermfg=white
 set pastetoggle=<F2>
 
 if $LANG =~ ".*\.UTF-8$" || $LANG =~ ".*utf8$" || $LANG =~ ".*utf-8$"
         try
-                set listchars=tab:»\ ,trail:·,precedes:…,extends:…
+                set listchars=tab:→\ ,trail:·,precedes:…,extends:…
                 set list
         catch
         endtry
@@ -111,7 +119,7 @@ set laststatus=2
 
 highlight clear SignColumn
 
-" set showtabline=2
+"set showtabline=2
 
 " set nobackup
 " set nowb

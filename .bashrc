@@ -5,6 +5,8 @@
 export DEBEMAIL='ahlers@univention.de'
 export DEBFULLNAME='Jannik Ahlers'
 
+export PATH=$PATH':~/toolshed/toolshed'
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -74,11 +76,19 @@ xterm*|rxvt*)
 *)
     ;;
 esac
+
+GIT_PS1_SHOWDIRTYSTATE=1
+GIT_PS1_SHOWSTASHSTATE=1
+GIT_PS1_SHOWUNTRACKEDFILES=1
+GIT_PS1_SHOWUPSTREAM="auto"
+GIT_PS1_SHOWCOLORHINTS=1
+PROMPT_DIRTRIM=3
 seed=$(hostname -f | md5sum | tr -dc '1234567')
 hc1=${seed:1:1}
 hc2=${seed:2:1}
-git1="\$(__git_ps1 ' \[\e[00;32m\](%s) \[\e[00m\]')"
-PS1="\${debian_chroot:+\[\e[01;31m\](\$debian_chroot)}\[\e[01;3${hc1}m\]\[\e[01;32m\]\t\[\e[00;32m\](\$? J\j)\[\e[00m\]\\n\u\[\e[00m\]@\[\e[01;3${hc1}m\]\h\[\e[00m\]: \[\e[01;34m\]\w\[\e[00m\]${git1}\$ "
+#PROMPT_COMMAND='__git_ps1 "\u@\h:\w" "\\\$ "'
+git1="\$(__git_ps1 ' \[\e[01;36m\](%s)\[\e[00m\]')"
+PS1=" \${debian_chroot:+\[\e[01;31m\](\$debian_chroot)}\[\e[01;32m\]\t \[\e[00;32m\](?\$? J\j)${git1}\[\e[00m\]\\n \[\e[01;32m\]\u\[\e[00m\]@\[\e[01;3${hc1}m\]\h\[\e[00m\]:\[\e[01;32m\]\w\[\e[00m\] \$ "
 PS2='> '
 PS3='> '
 PS4='+ '
@@ -108,6 +118,7 @@ alias l='ls -CF'
 alias ..='cd ..'
 alias ~='cd ~'
 alias work='cd /home/jahlers/work/ucs'
+alias calc='gcalccmd'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -158,3 +169,4 @@ function mkpo() {
     xg --language JavaScript -o message.po $(find umc -name '*.js') && msgmerge --update --sort-output umc/js/de.po message.po && rm -f message.po
     xg --language python -o message.po $(find umc -name '*.py') && msgmerge --update --sort-output "$(find umc/python/ -name 'de.po')" message.po && rm -f message.po
 }
+export TERM=xterm-256color

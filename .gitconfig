@@ -1,7 +1,7 @@
 #Diese Konfiguration ist wichtig für eine ordentliche History
 [user]
-        name = Jannik Ahlers
-        email = ahlers@univention.de
+	name = Jannik Ahlers
+	email = ahlers@univention.de
 # dieses Push-Verhalten ist eine für unseren Ablauf wichtige Sicherheitsfunktion
 [push]
         default = simple
@@ -23,6 +23,7 @@
         cob = checkout -b
         # ffmerge stellt sicher, dass ein Rebase des Feature Branches auf den UCS-Branch durchgeführt wurde
         ffmerge = "!ffmerge () { if [ \"$(git merge-base HEAD \"$1\")\" = \"$(git rev-parse HEAD)\" ]; then git merge --no-ff \"$1\";  else echo >&2 \"Not up to date; refusing to merge\"; return 1; fi; }; ffmerge"
+        tip = log HEAD -1 --stat --
 [branch]
         # Wenn diese Option angegeben ist, wird bei "git pull" immer "git pull --rebase" ausgeführt
         autosetuprebase = always
